@@ -1,0 +1,241 @@
+# 🧠 Crystal Forge Memory — Quick Development Reference
+
+## 🚀 Project Launch Commands
+
+**Development:**
+```bash
+cd agentforge
+npm run dev:tauri     # Full desktop app (recommended)
+npm run dev           # Web only (faster iteration)
+```
+
+**Prerequisites Check:**
+```bash
+# Verify Ollama is running
+curl http://localhost:11434/api/tags
+
+# Start Ollama if needed  
+ollama serve
+
+# Required model
+ollama pull codellama:13b-instruct
+```
+
+**Build Commands:**
+```bash
+npm run type-check    # TypeScript validation
+npm run build:tauri   # Production desktop app
+npm run lint          # Code quality check
+```
+
+---
+
+## 🔮 Component Generation Workflow
+
+### Standard Process:
+1. **Launch App:** `npm run dev:tauri`
+2. **Verify Connection:** Crystal status should show "Crystal Resonating" 
+3. **Cast Spell:** Enter description + `Ctrl+Enter`
+4. **Review:** Check live preview and generated code
+5. **Save:** Click "Save Last Generation" → Enter name
+6. **Access:** Components saved to `%APPDATA%/crystal-forge-components/`
+
+### Example Prompts:
+```
+"Create a responsive hero section with animated gradient background"
+"Build a pricing card with purple theme and hover effects"  
+"Design a modal dialog with backdrop blur and close button"
+"Generate a form with validation states and submit styling"
+"Create a navigation header with logo and menu items"
+```
+
+### Prompt Optimization:
+- Be specific about styling (colors, animations, layout)
+- Mention responsive behavior if needed
+- Include interactive elements (hover, click states)
+- Specify component props and variants
+
+---
+
+## 🛠 Development Patterns
+
+### File Structure Navigation:
+```
+Key Files:
+- src/services/amethyst.ts        # Component generation logic
+- src/stores/crystalStore.ts      # Application state  
+- src/components/dashboard/       # Main UI
+- src/services/componentManager.ts # File persistence
+- src-tauri/capabilities/default.json # Permissions
+```
+
+### State Management:
+- **Zustand** for app state
+- **Crystal Store** manages generation, performance, memory
+- **Component Manager** handles file operations
+- **Local Storage** for crystal configurations
+
+### Common Tasks:
+```bash
+# Add new component type to Amethyst
+# Edit: src/services/amethyst.ts → COMPONENT_PATTERNS
+
+# Modify crystal configuration  
+# Edit: src/lib/crystals.ts → DEFAULT_CRYSTALS
+
+# Update UI components
+# Edit: src/components/dashboard/Dashboard.tsx
+
+# Add new Tauri permissions
+# Edit: src-tauri/capabilities/default.json
+```
+
+---
+
+## 🐛 Troubleshooting Guide
+
+### "Crystal Dormant" Error:
+```bash
+# Check Ollama status
+ollama list
+ollama serve
+
+# Verify model installed
+ollama pull codellama:13b-instruct
+
+# Test API directly
+curl -X POST http://localhost:11434/api/generate \
+  -d '{"model": "codellama:13b-instruct", "prompt": "test"}'
+```
+
+### Component Not Saving:
+- Check Tauri filesystem permissions in `default.json`
+- Verify AppData directory is writable
+- Test with simpler component first
+- Check browser console for errors
+
+### Preview Broken:
+- Refresh preview with button
+- Check for TypeScript errors in generated code
+- Verify Tailwind classes are valid
+- Look for missing imports or syntax issues
+
+### TypeScript Errors:
+```bash
+# Clean check
+npm run type-check
+
+# Common fixes
+# - Remove unused imports
+# - Add proper type annotations  
+# - Fix React 19 compatibility (no React import needed)
+```
+
+### Build Issues:
+```bash
+# Rust toolchain update
+rustup update
+
+# Clean build
+cd src-tauri && cargo clean && cd ..
+npm run build:tauri
+
+# Dependency issues
+rm -rf node_modules package-lock.json
+npm install
+```
+
+---
+
+## 📊 Performance & Monitoring
+
+### Generation Metrics:
+- **Tokens/Second:** Monitor Ollama performance
+- **Response Time:** Track generation speed
+- **Success Rate:** Component compilation success
+- **Memory Usage:** Last 10 generations stored
+
+### Optimization Tips:
+- Use CodeLlama 13B for balance of quality/speed
+- Shorter prompts generate faster
+- Preview refresh if rendering issues
+- Clear crystal memory for better performance
+
+---
+
+## 🧪 Testing Procedures
+
+### Basic Functionality Test:
+1. **Start App:** `npm run dev:tauri`
+2. **Check Status:** Crystal should be "Resonating"
+3. **Generate:** "Create a simple purple button"
+4. **Verify Preview:** Component renders correctly
+5. **Save Test:** Save component to library
+6. **Search Test:** Search for saved component
+7. **Copy Test:** Copy code to clipboard
+
+### Component Types to Test:
+- **Button:** Variants, sizes, states
+- **Card:** Layout, content, hover effects  
+- **Hero:** Responsive, gradients, animations
+- **Form:** Inputs, validation, submission
+- **Modal:** Overlay, backdrop, close handling
+
+---
+
+## 🔄 Common Development Cycles
+
+### Adding New Component Pattern:
+1. **Edit** `src/services/amethyst.ts` → Add to `COMPONENT_PATTERNS`
+2. **Add Example** → Update `COMPONENT_EXAMPLES` 
+3. **Test Generation** → Try prompts for new pattern
+4. **Refine Prompt** → Adjust based on output quality
+
+### UI Improvements:
+1. **Edit Components** → `src/components/dashboard/`
+2. **Update State** → `src/stores/crystalStore.ts` if needed
+3. **Test Interactions** → Verify all UI functions
+4. **Check TypeScript** → `npm run type-check`
+
+### Performance Optimization:
+1. **Monitor Metrics** → Check tokens/sec, response time
+2. **Profile Generation** → Time different component types
+3. **Optimize Prompts** → Shorter, more specific descriptions
+4. **Update Model** → Try different Ollama models if needed
+
+---
+
+## 📝 Memory Entry Template
+
+```
+## YYYY-MM-DD – [Feature/Fix Description]
+
+**Task:** [What was accomplished]
+**Prompt:** "[Exact command or description used]"  
+**Files Changed:** 
+- src/path/to/file.ts
+- other/changed/files.tsx
+
+**Key Changes:**
+- Added X functionality to Y component
+- Fixed Z issue with A service
+- Updated B configuration for C feature
+
+**Testing:** 
+- [x] Feature works as expected
+- [x] TypeScript compiles clean
+- [x] No regressions in existing features
+
+**Gotchas:**
+- [Issue encountered and solution]
+- [Important notes for future reference]
+
+**Follow-ups:**
+- [ ] [Future tasks or improvements needed]
+```
+
+---
+
+**Last Updated:** 2025-08-12  
+**Version:** Phase 2.5 MVP  
+**Status:** Production Ready ✅
